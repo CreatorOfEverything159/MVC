@@ -1,0 +1,15 @@
+<div class="posts" style="overflow-y: scroll; max-height: 75%;">
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+            <div id="{{ post.id }}" class="mb-2 card post">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p class="text-muted">Создано пользователем {{ post.login }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="lead" style="font-size: 25px!important;">Пусто</p>
+    {% endif %}
+</div>

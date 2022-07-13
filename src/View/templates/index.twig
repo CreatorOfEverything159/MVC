@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ru">
+{% include 'head.twig' %}
+<body>
+
+<div class="container h-100">
+    {% include 'header.twig' %}
+    {% block posts %} {% include 'posts.twig' %} {% endblock %}
+</div>
+</body>
+</html>
