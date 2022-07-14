@@ -11,11 +11,13 @@ class MainController
 {
     private EntityManager $manager;
     private PageView $pageView;
+    private $rootPath;
 
     public function __construct(EntityManager $manager)
     {
         $this->manager = $manager;
         $this->pageView = new PageView();
+        $this->rootPath = '/mvc';
     }
 
     public function showMainPage()
@@ -60,9 +62,9 @@ class MainController
         if ($currentUser != NULL) {
             setcookie('login', $user->getLogin());
             setcookie('passwordHash', password_hash($user->getPassword(), PASSWORD_DEFAULT));
-            header('Location: ' . '/profilePage');
+            header('Location: ' . $this->rootPath . '/profilePage');
         } else {
-            header('Location: ' . '/loginPage');
+            header('Location: ' . $this->rootPath . '/loginPage');
         }
     }
 
@@ -75,11 +77,11 @@ class MainController
             ->getRepository(User::class)
             ->findByLogin($newUser->getLogin());
         if ($foundUser) {
-            header('Location: ' . '/registrationPage');
+            header('Location: ' . $this->rootPath . '/registrationPage');
         } else {
             $this->manager->persist($newUser);
             $this->manager->flush();
-            header('Location: ' . '/loginPage');
+            header('Location: ' . $this->rootPath . '/loginPage');
         }
     }
 
@@ -87,7 +89,7 @@ class MainController
     {
         setcookie('login', '');
         setcookie('password', '');
-        header('Location: ' . '/loginPage');
+        header('Location: ' . $this->rootPath . '/loginPage');
     }
 
     public function addPost($title, $content, $login)
@@ -102,9 +104,9 @@ class MainController
             $newPost->setContent($content);
             $this->manager->persist($newPost);
             $this->manager->flush();
-            header('Location: ' . '/');
+            header('Location: ' . $this->rootPath);
         } else {
-            header('Location: ' . '/profilePage');
+            header('Location: ' . $this->rootPath . '/profilePage');
         }
     }
 }
