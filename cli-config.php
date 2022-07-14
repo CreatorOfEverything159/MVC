@@ -6,7 +6,7 @@ use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Setup;
 use Dotenv\Dotenv;
 
-Dotenv::createImmutable(dirname(__DIR__))->load();
+Dotenv::createImmutable(__DIR__)->load();
 
 $config = Setup::createAnnotationMetadataConfiguration(array("src"), false, useSimpleAnnotationReader: false);
 $connection = [
