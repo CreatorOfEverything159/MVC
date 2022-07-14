@@ -15,7 +15,7 @@ class MainRouter
     public function __construct()
     {
         Dotenv::createImmutable(dirname(__DIR__, 2))->load();
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = rtrim($_SERVER['REQUEST_URI'], '/');
         $config = Setup::createAnnotationMetadataConfiguration(array("src"), false, useSimpleAnnotationReader: false);
         $connection = [
             "dbname" => $_ENV["DB_NAME"],
