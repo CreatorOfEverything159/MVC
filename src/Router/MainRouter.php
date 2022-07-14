@@ -32,27 +32,28 @@ class MainRouter
         }
 
         $mainController = new MainController($entityManager);
+        $rootPath = '/mvc';
 
         if (!isset($_COOKIE['login'])) {
             switch ($uri) {
-                case '/':
+                case $rootPath:
                 {
                     $mainController->showMainPage();
                     break;
                 }
-                case '/registrationPage': {
+                case $rootPath . '/registrationPage': {
                     $mainController->showRegistrationPage();
                     break;
                 }
-                case '/registration': {
+                case $rootPath . '/registration': {
                     $mainController->registration($_POST["login"], $_POST["password"]);
                     break;
                 }
-                case '/loginPage': {
+                case $rootPath . '/loginPage': {
                     $mainController->showLoginPage();
                     break;
                 }
-                case '/login': {
+                case $rootPath . '/login': {
                     $mainController->login($_POST["login"], $_POST["password"]);
                     break;
                 }
@@ -64,21 +65,21 @@ class MainRouter
             }
         } else {
             switch ($uri) {
-                case '/':
+                case $rootPath:
                 {
                     $mainController->showMainPage();
                     break;
                 }
-                case '/profilePage':
+                case $rootPath . '/profilePage':
                 {
                     $mainController->showProfilePage();
                     break;
                 }
-                case '/logout': {
+                case $rootPath . '/logout': {
                     $mainController->logout();
                     break;
                 }
-                case '/addPost': {
+                case $rootPath . '/addPost': {
                     $mainController->addPost($_POST["title"], $_POST["content"], $_COOKIE["login"]);
                     break;
                 }
@@ -89,43 +90,5 @@ class MainRouter
                 }
             }
         }
-
-//        switch ($uri) {
-//            case '/':
-//            {
-//                $mainController->showMainPage();
-//                break;
-//            }
-//            case '/profilePage':
-//            {
-//                $mainController->showProfilePage();
-//                break;
-//            }
-//            case '/registrationPage': {
-//                $mainController->showRegistrationPage();
-//                break;
-//            }
-//            case '/registration': {
-//                $mainController->registration($_POST["login"], $_POST["password"]);
-//                break;
-//            }
-//            case '/loginPage': {
-//                $mainController->showLoginPage();
-//                break;
-//            }
-//            case '/login': {
-//                $mainController->login($_POST["login"], $_POST["password"]);
-//                break;
-//            }
-//            case '/logout': {
-//                $mainController->logout();
-//                break;
-//            }
-//            default:
-//            {
-//                $mainController->showErrorPage();
-//                break;
-//            }
-//        }
     }
 }
